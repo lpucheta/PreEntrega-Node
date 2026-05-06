@@ -40,6 +40,23 @@ async function eliminarProducto(){
 }
 
 
+async function crearProducto(){
+    try {
+        const response = await fetch("https://fakestoreapi.com/products", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({title: producto[0], price: parseFloat(producto[1]), category: producto[2]})
+        });
+        const data = await response.json();
+        console.log(data);
+    } catch (error) {
+        console.error("Error al crear el producto:", error);
+    }
+    
+}
+
+
+
 
 switch(metodo){
     case "GET":
@@ -50,7 +67,7 @@ switch(metodo){
         }
         break;
     case "POST":
-        console.log("Agregando producto...");
+        crearProducto();
         break;
     case "DELETE":
         eliminarProducto();
