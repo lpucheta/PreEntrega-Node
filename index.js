@@ -51,12 +51,8 @@ async function crearProducto(){
         console.log(data);
     } catch (error) {
         console.error("Error al crear el producto:", error);
-    }
-    
+    } 
 }
-
-
-
 
 switch(metodo){
     case "GET":
