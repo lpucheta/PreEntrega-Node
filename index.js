@@ -26,6 +26,21 @@ async function productoPorID(){
 }
 
 
+async function eliminarProducto(){
+    try{
+        const id = proceso.split("/")[1];
+        const response = await fetch(`https://fakestoreapi.com/products/${id}`, {
+            method: "DELETE"
+        });
+        const data = await response.json();
+        console.log(data);
+    }catch(error){
+        console.error("Error al eliminar el producto:", error);
+    }
+}
+
+
+
 switch(metodo){
     case "GET":
         if(proceso.includes("/")){
@@ -38,7 +53,7 @@ switch(metodo){
         console.log("Agregando producto...");
         break;
     case "DELETE":
-        console.log("Eliminando producto...");
+        eliminarProducto();
         break;
     default:
         console.log("Metodo no reconocido");
