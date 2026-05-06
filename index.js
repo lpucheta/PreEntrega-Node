@@ -1,0 +1,47 @@
+const args = process.argv.slice(2);
+
+const [metodo, proceso, ...producto] = args;
+
+
+async function todosLosProductos(){
+    try{
+        const response = await fetch("https://fakestoreapi.com/products");
+        const data = await response.json();
+        console.log(data);
+    } catch (error) {
+        console.error("Error al obtener los productos:", error);
+    }
+}
+
+async function productoPorID(){
+    try{
+        const id = proceso.split("/")[1];
+        const response = await fetch(`https://fakestoreapi.com/products/${id}`);
+        const data = await response.json();
+        console.log(data);
+
+    }catch(error){
+        console.error("Error al obtener el producto por ID:", error);
+    }
+}
+
+
+switch(metodo){
+    case "GET":
+        if(proceso.includes("/")){
+            productoPorID();
+        }else{
+            todosLosProductos();
+        }
+        break;
+    case "POST":
+        console.log("Agregando producto...");
+        break;
+    case "DELETE":
+        console.log("Eliminando producto...");
+        break;
+    default:
+        console.log("Metodo no reconocido");
+}
+
+
